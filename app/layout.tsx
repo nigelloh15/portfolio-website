@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local';
 
-const PlayFair = localFont({ src: '../public/fonts/Playfair-VariableFont_opsz,wdth,wght.ttf' });
+const Montserrat = localFont({ src: '../public/fonts/Montserrat-VariableFont_wght.ttf' });
 
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={PlayFair.className}
+        className={Montserrat.className}
       >
         {children}
       </body>

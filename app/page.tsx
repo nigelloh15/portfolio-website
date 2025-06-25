@@ -5,9 +5,10 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { TextPlugin } from "gsap/TextPlugin";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ExpoScaleEase } from "gsap/EasePack";
 import Image from "next/image";
-import Link from "next/link";
+import { Span } from "next/dist/trace";
 
 export default function Home() {
 
@@ -25,183 +26,96 @@ export default function Home() {
     requestAnimationFrame(raf);
   });
 
-  const first = "NIGEL";
-  const last = "LOH";
-
   useGSAP(() => {
 
-    // Register GSAP plugins
-    gsap.registerPlugin(TextPlugin);
-    gsap.registerPlugin(ScrollToPlugin);
-
-    const typetl = gsap.timeline();
-
-    function subType() {
-
-      let tl = gsap.timeline();
-
-      tl.to(".firstname", {
-        duration: 1,
-        text: first,
-        ease: "power2.out",
-      })
-      tl.to(".space", {
-        duration: 0.5,
-        text: " ",
-        ease: "none",
-      })
-      tl.to(".lastname", {
-        duration: 1,
-        text: last,
-        ease: "power1.out",
-      })
-
-      return tl;
-    }
+    gsap.registerPlugin(TextPlugin, ScrollTrigger, ExpoScaleEase);
 
 
-    typetl.to(".cursor", { opacity: 0, duration: 0, repeat: 5, yoyo: true, repeatDelay: 0.5 });
-    typetl.to(".cursor", { opacity: 1, duration: 0 });
-    typetl.add(subType());
-    typetl.to(".cursor", { opacity: 0, duration: 0, repeat: 5, yoyo: true, repeatDelay: 0.5 });
-    typetl.to(".cursor", { opacity: 1, duration: 0 });
-
-    let reverseSub = subType();
-    typetl.add(reverseSub.progress(1), "-=1.5");
-    typetl.add(reverseSub.reverse(), "-=1.5");
-    typetl.to(".cursor", { opacity: 0, duration: 0 });
-    typetl.set(".textbox", {
-      display: "none",
+    gsap.to(".nigeltext", {
+      scale: 0.3,
+      yoyo: true,
+      transformOrigin: "center top",
+      ease: "expoScale(1, 2, power1.in)",
+      scrollTrigger: {
+        trigger: ".nigeltext",
+        start: "clamp(bottom bottom)",    // when .nigel’s top hits the viewport top
+        end: "10% top",          // finish the tween when you've scrolled 10% of the viewport height
+        scrub: 0.5,         // link tween to scroll
+        pinSpacing: false,   // remove extra space below it if you don’t want padding
+        markers: true        // handy for debugging start/end
+      }
     });
-    typetl.set(".scenery", {
-      display: "flex",
+
+    gsap.to(".frontimagebox", {
+      width: "95%",
+      height: "100vh",
+      yoyo: true,
+      transformOrigin: "center top",
+      ease: "expoScale(1, 2, power1.in)",
+      scrollTrigger: {
+        trigger: ".nigeltext",
+        start: "clamp(bottom bottom)",    // when .nigel’s top hits the viewport top
+        end: "10% top",          // finish the tween when you've scrolled 10% of the viewport height
+        scrub: 0.5,         // link tween to scroll
+        pinSpacing: false,   // remove extra space below it if you don’t want padding
+        markers: true        // handy for debugging start/end
+      }
     });
-    typetl.set(".header", {
-      display: "block",
-    });
-    typetl.to(".scenery", {
+
+    gsap.to(".header", {
+      opacity: 1,
       duration: 1.5,
       ease: "power1.inOut",
-      opacity: 1,
-      delay: 0.5,
+      delay: 1,
     });
-    typetl.to(".header", {
-      duration: 1.5,
-      ease: "power1.inOut",
-      opacity: 1,
-    });
-    typetl.set(".later", {
-      display: "block",
-    })
+
 
 
   });
 
-  useGSAP(() => {
-
-    const images = gsap.utils.toArray<HTMLElement>(".projectimage");
-
-    images.forEach(imgEl => {
-      const tl = gsap.timeline({ paused: true })
-        .to(imgEl, {
-          filter: "brightness(1) saturate(1)",
-          duration: 0.3,
-          ease: "power1.out"
-        });
-
-      imgEl.addEventListener("mouseenter", () => tl.play());
-      imgEl.addEventListener("mouseleave", () => tl.reverse());
-
-      console.log("Image element:", imgEl);
-
-    });
-  });
 
   return (
-    <div className="tracking-tighter">
-      <div className="header hidden fixed opacity-0 w-full h-[10%] z-20">
-        <div className="absolute flex flex-row justify-evenly items-center w-[20%] h-full text-[5vw] z-30">
-          <a target="_blank" href="https://www.github.com/nigelloh15" className="w-[5vw] h-[5vw] md:w-[3vw] md:h-[3vw] lg:w-[1.5vw] lg:h-[1.5vw] mx-2">
-            <Image src="/github.svg" alt="github" width={128} height={128} />
-          </a>
-          <a target="_blank" href="https://www.linkedin.com/in/nigelloh15" className="w-[5vw] h-[5vw] md:w-[3vw] md:h-[3vw] lg:w-[1.5vw] lg:h-[1.5vw] mx-2">
-            <Image src="/linkedin.svg" alt="github" width={128} height={128} />
-          </a>
-        </div>
-        <div className="absolute flex justify-center items-center w-full h-full">
-          <span className="text-[6vw] md:text-[5vw] tracking-tighter">
-            NIGEL LOH
-          </span>
+    <div className="main">
+      <div className="header fixed w-screen h-8 top-2 left-0 opacity-0 flex items-center space-x-2 px-4 z-50">
+        <a href="https://www.linkedin.com/in/nigelloh15" target="_blank" className="relative w-9 h-9 backdrop-blur-lg bg-[rgba(242,238,233,0.5)] rounded-[0.4vw]">
+          <Image src="/linkedin.svg" alt="linkedin" fill className="object-contain p-2" />
+
+        </a>
+        <a href="https://www.github.com/nigelloh15" target="_blank" className="relative w-9 h-9 backdrop-blur-lg bg-[rgba(242,238,233,0.5)] rounded-[0.4vw]">
+          <Image src="/github.svg" alt="github" fill className="object-contain p-2" />
+        </a>
+      </div>
+      <div className="spacer h-[12vh]">
+      </div>
+      <div className="stickybox sticky top-0 z-10">
+        <div className="nigelbox flex justify-center">
+          <div className="nigeltext pt-6 text-[20vw] md:pt-0 md:text-[15vw] lg:text-[10vw]">NIGEL</div>
         </div>
       </div>
-      <div className="flex justify-center items-center h-screen">
-        <div className="textbox text-[10vw] md:text-[8vw]">
-          <span className="invisible">
-            |
-          </ span>
-          <span className="firstname tracking-tighter" />
-          <span className="space tracking-tighter" />
-          <span className="lastname tracking-tighter" />
-          <span className="cursor font-extralight">
-            |
-          </ span>
-        </div>
-        <div className="scenery hidden opacity-0 w-full md:w-[60%] h-[70%] lg:w-[50%] px-12 flex-col">
-          {/* 1. image container gets 80% of the parent height */}
-          <div className="relative w-full h-[95%]">
-            <Image
-              src="/scenery.jpg"
-              alt="scenery"
-              fill
-              className="object-cover filter-[brightness(0.6)]"
-            />
-          </div>
 
-          {/* 2. caption below, pushes the image up */}
-          <div className="flex flex-row pt-2">
-            <span className="h-full w-[50%] text-[3vw] md:text-[2vw] lg:text-[1.5vw] tracking-tight">
-              Math + CS @ UofT, SWE from Vancouver
+      <div className="start w-screen h-[150vh]">
+        <div className="spacer h-[9vh]">
+
+        </div>
+        <div className="w-full h-[64%] flex flex-col items-center">
+          <div className="frontimagebox relative flex justify-center w-[85%] h-[80vh]">
+            <Image src="/scenery.jpg" alt="Nigel" fill className="object-cover object-center rounded-[1vw]" />
+          </div>
+        </div>
+        <div className="about px-[2.5vw] py-[1vh]">
+          <div className="text-[4vw] md:text-[3vw] lg:text-[2.3vw] font-light">
+            <span>
+              Software Engineer from Vancouver, Math + CS @ University of Toronto
             </span>
-            <div className="h-full w-[50%] bg-gradient-to-r from-[#262626] to-[#b8b8b8]">
-
-            </div>
+            <span>&nbsp;</span>
+            <span className="text-[#C2B9AC]">
+              -  Strong interest in quant finance and machine learning, open to oppurtunities in both areas.
+            </span>
           </div>
         </div>
       </div>
-      <div className="h-[200vh] hidden later">
-        <div className="projects flex justify-center items-center h-screen w-screen">
-          <div className="w-[80%] h-[60%]">
-            <p className="italic text-[6vw]">
-              PROJECTS
-            </p>
-            <div className="projectbox flex flex-row w-full h-full">
-              <div className="relative w-1/3 h-full">
-                <Image
-                  src="/scenery.jpg"
-                  alt="scenery"
-                  fill
-                  className="projectimage object-cover filter-[brightness(0.6)] px-2"
-                />
-              </div>
-              <div className="relative w-1/3 h-full">
-                <Image
-                  src="/scenery.jpg"
-                  alt="scenery"
-                  fill
-                  className="projectimage object-cover filter-[brightness(0.6)] px-2"
-                />
-              </div>
-              <div className="relative w-1/3 h-full">
-                <Image
-                  src="/scenery.jpg"
-                  alt="scenery"
-                  fill
-                  className="projectimage object-cover filter-[brightness(0.6)] px-2"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+
+      <div className="w-screen h-[100vh] bg-gray-100">
       </div>
     </div>
   );
