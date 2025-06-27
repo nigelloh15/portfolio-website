@@ -31,44 +31,60 @@ export default function Home() {
     gsap.registerPlugin(TextPlugin, ScrollTrigger, ExpoScaleEase);
 
 
+    const tl = gsap.timeline();
+
+    tl.to(".header", {
+      opacity: 1,
+      duration: 1.5,
+      ease: "power1.inOut",
+      delay: 1,
+    });
+    tl.set(".later", {
+      display: "block",
+    })
+
+
     gsap.to(".nigeltext", {
       scale: 0.3,
       yoyo: true,
       transformOrigin: "center top",
       ease: "expoScale(1, 2, power1.in)",
       scrollTrigger: {
-        trigger: ".nigeltext",
-        start: "clamp(bottom bottom)",    // when .nigel’s top hits the viewport top
-        end: "10% top",          // finish the tween when you've scrolled 10% of the viewport height
+        trigger: ".start",
+        start: "clamp(top bottom)",    // when .nigel’s top hits the viewport top
+        end: "-75% top",          // finish the tween when you've scrolled 10% of the viewport height
         scrub: 0.5,         // link tween to scroll
         pinSpacing: false,   // remove extra space below it if you don’t want padding
-        markers: true        // handy for debugging start/end
+        markers: true,
       }
     });
 
-    gsap.to(".frontimagebox", {
-      width: "95%",
-      height: "100vh",
-      yoyo: true,
-      transformOrigin: "center top",
-      ease: "expoScale(1, 2, power1.in)",
-      scrollTrigger: {
-        trigger: ".nigeltext",
-        start: "clamp(bottom bottom)",    // when .nigel’s top hits the viewport top
-        end: "10% top",          // finish the tween when you've scrolled 10% of the viewport height
-        scrub: 0.5,         // link tween to scroll
-        pinSpacing: false,   // remove extra space below it if you don’t want padding
-        markers: true        // handy for debugging start/end
-      }
-    });
 
-    gsap.to(".header", {
+    const opactiytl = gsap.timeline();
+
+    opactiytl.set(".about", {
+      opacity: 0
+    })
+    opactiytl.to(".about", {
       opacity: 1,
-      duration: 1.5,
-      ease: "power1.inOut",
-      delay: 1,
+      ease: "power1.in",
+      duration: 1,
     });
 
+    opactiytl.set(".about", {
+      opacity: 1
+    })
+
+    gsap.to(".about", {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: ".start",
+        start: "clamp(top bottom)",    // when .nigel’s top hits the viewport top
+        end: "bottom-=45% top",          // finish the tween when you've scrolled 10% of the viewport height
+        scrub: 0.5,         // link tween to scroll
+        markers: true        // handy for debugging start/end
+      },
+    });
 
 
   });
@@ -76,7 +92,7 @@ export default function Home() {
 
   return (
     <div className="main">
-      <div className="header fixed w-screen h-8 top-2 left-0 opacity-0 flex items-center space-x-2 px-4 z-50">
+      <div className="header fixed w-screen h-8 top-4 left-0 opacity-0 flex items-center space-x-2 px-4 z-50">
         <a href="https://www.linkedin.com/in/nigelloh15" target="_blank" className="relative w-9 h-9 backdrop-blur-lg bg-[rgba(242,238,233,0.5)] rounded-[0.4vw]">
           <Image src="/linkedin.svg" alt="linkedin" fill className="object-contain p-2" />
 
@@ -87,35 +103,29 @@ export default function Home() {
       </div>
       <div className="spacer h-[12vh]">
       </div>
-      <div className="stickybox sticky top-0 z-10">
-        <div className="nigelbox flex justify-center">
-          <div className="nigeltext pt-6 text-[20vw] md:pt-0 md:text-[15vw] lg:text-[10vw]">NIGEL</div>
+      <div className="stickybox sticky top-0 z-10 pt-4">
+        <div className="nigelbox flex flex-col items-center w-full h-[40vh]">
+          <div className="nigeltext text-[min(20vh,20vw)] md:pt-0 md:text-[min(15vw,15vh)] lg:text-[10vw]">NIGEL</div>
         </div>
       </div>
 
-      <div className="start w-screen h-[150vh]">
-        <div className="spacer h-[9vh]">
-
-        </div>
-        <div className="w-full h-[64%] flex flex-col items-center">
-          <div className="frontimagebox relative flex justify-center w-[85%] h-[80vh]">
-            <Image src="/scenery.jpg" alt="Nigel" fill className="object-cover object-center rounded-[1vw]" />
-          </div>
-        </div>
-        <div className="about px-[2.5vw] py-[1vh]">
-          <div className="text-[4vw] md:text-[3vw] lg:text-[2.3vw] font-light">
+      <div className="start w-screen h-[48vh]">
+        <div className="about px-[5vw] z-10 sticky">
+          <div className="text-[min(4vw, 4vh)] md:text-[3vw] lg:text-[2.3vw] font-light">
             <span>
               Software Engineer from Vancouver, Math + CS @ University of Toronto
             </span>
             <span>&nbsp;</span>
-            <span className="text-[#C2B9AC]">
+            <span className="text-[var(--light)]">
               -  Strong interest in quant finance and machine learning, open to oppurtunities in both areas.
             </span>
           </div>
         </div>
       </div>
-
-      <div className="w-screen h-[100vh] bg-gray-100">
+      <div className="later hidden w-screen h-[200vh] z-20">
+        <div className="skills bg-[var(--light)] rounded-[2vw] h-[150vh]">
+          
+        </div>
       </div>
     </div>
   );

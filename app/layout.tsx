@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local';
 
-const Montserrat = localFont({ src: '../public/fonts/Montserrat-VariableFont_wght.ttf' });
-
+const LemonMilk = localFont({
+  src: '../public/fonts/LEMONMILK-Regular.otf',
+  variable: "--font-lemonmilk",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={Montserrat.className}
+        className={`${LemonMilk.className}`}
       >
         {children}
       </body>
