@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { TextPlugin } from "gsap/TextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitText from "gsap/SplitText";
 import { ExpoScaleEase } from "gsap/EasePack";
 import Image from "next/image";
 
@@ -75,6 +76,29 @@ export default function Home() {
 
   useGSAP(() => {
 
+    gsap.registerPlugin(SplitText, ScrollTrigger);
+
+    const split = new SplitText(".projecttext", { type: "chars" });
+
+    let chars = split.chars; // an array of all the divs that wrap each character
+
+    gsap.from(chars, {
+      scrollTrigger: {
+        trigger: ".projects",
+        start: "top bottom-=20%",    // when .projecttext’s top hits the viewport top
+        markers: true, // add markers for debugging
+      },
+      yPercent: 130,
+      stagger: 0.03,
+      ease: "power1.inOut",
+      duration: 1,
+
+    });
+
+  });
+
+  useGSAP(() => {
+
     gsap.registerPlugin(TextPlugin, ScrollTrigger, ExpoScaleEase);
 
     const tl = gsap.timeline();
@@ -107,6 +131,15 @@ export default function Home() {
 
       onEnter: () => gsap.set('.nigeltext', { color: 'var(--light)' }),
       onLeaveBack: () => gsap.set('.nigeltext', { color: 'var(--foreground)' }), // “” → fall back to CSS
+    });
+
+    ScrollTrigger.create({
+      trigger: '.extra',
+      start: 'top top',
+      end: 'bottom top',
+
+      onEnter: () => gsap.set('.nigeltext', { color: 'var(--foreground)' }),
+      onLeaveBack: () => gsap.set('.nigeltext', { color: 'var(--light)' }), // “” → fall back to CSS
     });
 
     gsap.to(".about", {
@@ -205,7 +238,6 @@ export default function Home() {
               SKILLS-
             </span>
           </div>
-
           <div className="bottomtext absolute bottom-0 right-4/5 text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] text-[var(--background)] text-nowrap w-full">
             <span>
               SKILLS-
@@ -226,11 +258,17 @@ export default function Home() {
               SKILLS-
             </span>
           </div>
+
+
+          <div className="skilllist py-[22vw] sm:py-[18vw] md:py-[15vw] lg:py-[12vw] h-full w-full">
+            hello
+          </div>
+
         </div>
         <div className="quote w-screen h-[50vh] z-20 bg-[var(--background)]">
           <div className="w-full h-full flex flex-col justify-center items-center text-[var(--mid)] text-center">
             <div className="text-[6vw] md:text-[4vw] lg:text-[2vw]">
-              QUOTE FOR NOW
+              QUOTE OF THE TIME BEING
             </div>
             <div className="text-[3vw] md:text-[2vw] lg:text-[1vw] py-3">
               "Icaraus lauged as he fell. For he knew that falling meant that he had soared."
@@ -240,46 +278,60 @@ export default function Home() {
         <div className="projects w-screen h-[190vh] sm:h-[300vh]">
           <div className="w-full h-full sm:flex sm:flex-row bg-[var(--mid)] rounded-[2vw] text-[var(--light)]">
             <div className="hidden sm:block relative h-full w-[50%]">
-              <div className="sticky top-0 px-[2%] pt-[23%] md:pt-[10%] lg:pt-[7%]">
-                <div className="text-[8vw] lg:text-[5vw]">
-                  PROJECTS
+              <div className="sticky top-0 px-[3%] pt-[23%] md:pt-[10%] lg:pt-[7%]">
+                <div className="overflow-hidden">
+                  <div className="projecttext text-[8vw] lg:text-[6vw]">
+                    PROJECTS
+                  </div>
                 </div>
               </div>
             </div>
             <div className="px-4 sm:px-0 sm:w-[50%] overflow-hidden">
-                <div className="sm:hidden text-[10vw] pt-[10%] h-[10vh]">
+              <div className="overflow-hidden pt-[10%]">
+                <div className="projecttext sm:hidden text-[10vw] h-[10vh]">
                   PROJECTS
                 </div>
-              <div className="one w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center">
+              </div>
+              <div className="one w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
                 <div className="text-[8vw] sm:text-[4vw]">
                   OneMillionNotes
                 </div>
                 <div className="text-[4vw] sm:text-[1.3vw]">
-                  This is a project I worked on with a team of 4. It is a web application that allows users to create, share, and discover notes on various topics. The application is built using React, Node.js, and MongoDB.
+                  Winner of UofTHacks 12. Built with Next.js and Firebase, OneMillionNotes is a social media platform based on sticky note boards. It allows  users to users to anonymously submit short messages in real time with users across the globe.
                 </div>
               </div>
-              <div className="one w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center">
+              <div className="two w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
                 <div className="text-[8vw] sm:text-[4vw]">
-                  OneMillionNotes
+                  Mammonet
                 </div>
                 <div className="text-[4vw] sm:text-[1.3vw]">
-                  This is a project I worked on with a team of 4. It is a web application that allows users to create, share, and discover notes on various topics. The application is built using React, Node.js, and MongoDB.
+                  Built with Next.js, Django, and PyTorch, Mammonet is a web application that assists with classifying malignant breast cancer histopathological images. Powered by a convolutional neural network, Mammonet can successfully identify malignant breast cancer cells with 86% accuracy.
                 </div>
               </div>
-              <div className="one w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center">
+              <div className="three w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
                 <div className="text-[8vw] sm:text-[4vw]">
-                  OneMillionNotes
+                  Modulus
                 </div>
                 <div className="text-[4vw] sm:text-[1.3vw]">
-                  This is a project I worked on with a team of 4. It is a web application that allows users to create, share, and discover notes on various topics. The application is built using React, Node.js, and MongoDB.
+                  Using Vite with React.js, Express.js, PrismaORM, and MongoDB, I developed Modulus, a social media platform designed for privacy. Modulus using RSA cryptography with the Miller-Rabin primality test to create encrypted messages that are publicly posted.
                 </div>
               </div>
             </div>
 
           </div>
         </div>
-        <div className="w-screen h-[120vh] z-20 bg-[var(--background)]">
+        <div className="extra w-screen h-[20vh] z-20 bg-[var(--background)]">
+          <div className="text-[4vw] text-right px-8">
+            Hello, I'm Nigel Loh.
+          </div>
+        </div>
 
+        <div className="w-screen h-[80vh] flex justify-center">
+          <div className="w-[92%] h-[100%] rounded-[1vw] bg-[var(--light)]">
+            
+          </div>
+        </div>
+        <div className="w-screen h-[20vh] flex justify-center">
         </div>
       </div>
     </div>
