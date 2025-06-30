@@ -1,7 +1,7 @@
 "use client";
 
 import Lenis from "lenis";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { TextPlugin } from "gsap/TextPlugin";
@@ -9,9 +9,32 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
 import { ExpoScaleEase } from "gsap/EasePack";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
 
+  const [stripWidth, setStripWidth] = useState<number>(0);
+
+  useEffect(() => {
+    // Function to update the strip width
+    const updateStripWidth = () => {
+      const strip = document.querySelector(".toptext");
+      if (strip) {
+        setStripWidth(strip.scrollWidth);
+      }
+    };
+
+    // Initial call to set the width
+    updateStripWidth();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", updateStripWidth);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener("resize", updateStripWidth);
+    };
+  }, [stripWidth]);
 
   useEffect(() => {
     // Initialize Lenis
@@ -26,14 +49,8 @@ export default function Home() {
     requestAnimationFrame(raf);
   });
 
+
   useGSAP(() => {
-
-    // grab the element once
-    const strip = document.querySelector(".toptext");
-    // its full pixel width (off-screen part included)
-    if (!strip) return;
-
-    const stripWidth = strip?.scrollWidth;
 
     const textTL = gsap.timeline();
 
@@ -42,22 +59,14 @@ export default function Home() {
       duration: 6,
       ease: "none",
       repeat: -1, // Repeat indefinitely
-      invalidateOnRefresh: true,
     });
     textTL.set(".toptext", {
       x: 0,
     });
 
-  });
+  }, [stripWidth]);
 
   useGSAP(() => {
-
-    // grab the element once
-    const strip = document.querySelector(".bottomtext");
-    // its full pixel width (off-screen part included)
-    if (!strip) return;
-
-    const stripWidth = strip?.scrollWidth;
 
     const textTL = gsap.timeline();
 
@@ -66,13 +75,12 @@ export default function Home() {
       duration: 6,
       ease: "none",
       repeat: -1, // Repeat indefinitely
-      invalidateOnRefresh: true,
     });
     textTL.set(".bottomtext", {
       x: 0,
     });
 
-  });
+  }, [stripWidth]);
 
   useGSAP(() => {
 
@@ -86,7 +94,6 @@ export default function Home() {
       scrollTrigger: {
         trigger: ".projects",
         start: "top bottom-=20%",    // when .projecttext’s top hits the viewport top
-        markers: true, // add markers for debugging
       },
       yPercent: 130,
       stagger: 0.03,
@@ -107,7 +114,7 @@ export default function Home() {
       opacity: 1,
       duration: 1.5,
       ease: "power1.inOut",
-      delay: 1,
+      delay: 0.5,
     });
 
     gsap.to(".nigeltext", {
@@ -134,7 +141,7 @@ export default function Home() {
     });
 
     ScrollTrigger.create({
-      trigger: '.extra',
+      trigger: '.temp',
       start: 'top top',
       end: 'bottom top',
 
@@ -153,28 +160,28 @@ export default function Home() {
     });
 
 
-    gsap.fromTo(".skills",
+    gsap.fromTo(".experience",
       {
         width: "95%",
       },
       {
         width: "100%",
         scrollTrigger: {
-          trigger: ".skills",
+          trigger: ".experience",
           start: "top bottom",    // when <.skills>’s top hits the viewport top
           end: "+=30%",
           scrub: 0.5,
         }
       });
 
-    gsap.fromTo(".skills",
+    gsap.fromTo(".experience",
       {
         width: "100%",
       },
       {
         width: "95%",
         scrollTrigger: {
-          trigger: ".skills",
+          trigger: ".experience",
           start: "bottom+=20% bottom",    // when <.skills>’s top hits the viewport top
           end: "+=80%",          // finish the tween when you've scrolled 10% of the viewport height
           scrub: 0.5,
@@ -217,51 +224,61 @@ export default function Home() {
         </div>
       </div>
       <div className="later flex flex-col w-screen z-20 items-center">
-        <div className="relative skills bg-[var(--light)] rounded-[2vw] h-[120vh] overflow-hidden w-full">
-          <div className="toptext absolute text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] text-[var(--background)] text-nowrap w-full">
+        <div className="relative experience bg-[var(--light)] rounded-[2vw] h-[120vh] overflow-hidden w-full">
+          <div key={stripWidth} className="toptext absolute text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] text-[var(--background)] text-nowrap w-full">
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
           </div>
-          <div className="bottomtext absolute bottom-0 right-4/5 text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] text-[var(--background)] text-nowrap w-full">
+          <div key={stripWidth + 1} className="bottomtext absolute bottom-0 right-4/5 text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] text-[var(--background)] text-nowrap w-full">
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
             <span>
-              SKILLS-
+              EXPERIENCE-
             </span>
           </div>
 
 
-          <div className="skilllist py-[22vw] sm:py-[18vw] md:py-[15vw] lg:py-[12vw] h-full w-full">
-            hello
+          <div className="skilllist py-[22vw] sm:py-[18vw] md:py-[15vw] lg:py-[12vw] h-full w-full flex flex-col justify-center text-[var(--background)] px-6">
+            <div>
+              <div className="lg:inline-block text-[8vw] md:text[7vw] lg:text-[5vw]">
+                PointClickCare&nbsp;
+              </div>
+              <div className="lg:inline-block text-[3vw] md:text-[2vw] lg:text-[1vw]">
+                May 2025 - August 2025
+              </div>
+            </div>
+            <div className="text-[5vw] md:text-[4vw] lg:text-[2vw]">
+              Data Intern
+            </div>
           </div>
 
         </div>
@@ -293,25 +310,34 @@ export default function Home() {
                 </div>
               </div>
               <div className="one w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
-                <div className="text-[8vw] sm:text-[4vw]">
-                  OneMillionNotes
-                </div>
+                <Link href="https://www.onemillionnotes.co" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
+                  <span>
+                    OneMillionNotes
+                  </span>
+                  <span>&#8599;</span>
+                </Link>
                 <div className="text-[4vw] sm:text-[1.3vw]">
                   Winner of UofTHacks 12. Built with Next.js and Firebase, OneMillionNotes is a social media platform based on sticky note boards. It allows  users to users to anonymously submit short messages in real time with users across the globe.
                 </div>
               </div>
               <div className="two w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
-                <div className="text-[8vw] sm:text-[4vw]">
-                  Mammonet
-                </div>
+                <Link href="https://github.com/hackbio-ca/ai-cancer-cell-labelling" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
+                  <span>
+                    Mammonet
+                  </span>
+                  <span>&#8599;</span>
+                </Link>
                 <div className="text-[4vw] sm:text-[1.3vw]">
                   Built with Next.js, Django, and PyTorch, Mammonet is a web application that assists with classifying malignant breast cancer histopathological images. Powered by a convolutional neural network, Mammonet can successfully identify malignant breast cancer cells with 86% accuracy.
                 </div>
               </div>
               <div className="three w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
-                <div className="text-[8vw] sm:text-[4vw]">
-                  Modulus
-                </div>
+                <Link href="https://github.com/nigelloh15/modulus" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
+                  <span>
+                    Modulus
+                  </span>
+                  <span>&#8599;</span>
+                </Link>
                 <div className="text-[4vw] sm:text-[1.3vw]">
                   Using Vite with React.js, Express.js, PrismaORM, and MongoDB, I developed Modulus, a social media platform designed for privacy. Modulus using RSA cryptography with the Miller-Rabin primality test to create encrypted messages that are publicly posted.
                 </div>
@@ -320,19 +346,40 @@ export default function Home() {
 
           </div>
         </div>
-        <div className="extra w-screen h-[20vh] z-20 bg-[var(--background)]">
+        <div className="temp w-screen h-[20vh] z-20 bg-[var(--background)]">
           <div className="text-[4vw] text-right px-8">
-            Hello, I'm Nigel Loh.
           </div>
         </div>
 
-        <div className="w-screen h-[80vh] flex justify-center">
-          <div className="w-[92%] h-[100%] rounded-[1vw] bg-[var(--light)]">
-            
+        <div className="notes w-screen flex justify-center">
+          <div className="w-[92%] h-full rounded-[1vw] bg-[var(--light)] overflow-hidden text-[var(--mid)]">
+            <div className="text-[8vw] lg:text-[6vw] px-6 pt-4 lg:pt-0 h-[15vh]">
+              NOTES
+            </div>
+
+            <div className="flex flex-col justify-evenly h-[80%] w-full pt-[0.2vw]">
+              <div className="text-left py-6">
+                <div className="text-[5vw] sm:text-[3vw] px-6">
+                  Contact Me
+                </div>
+                <div className="text-[2vw] sm:text-[1vw] px-6">
+                  For work inquires, contact me on my LinkedIn, in the top right corner.
+                </div>
+              </div>
+              <div className="text-left py-6">
+                <div className="text-[5vw] sm:text-[3vw] px-6">
+                  Hobbies
+                </div>
+                <div className="text-[2vw] sm:text-[1vw] px-6">
+                  Love making my own films, have used davinci resolve, premiere pro, after effects, and blender. Also love playing sports, hockey, tennis, volleyball, and pingpong.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="w-screen h-[20vh] flex justify-center">
-        </div>
+      </div>
+      <div className="end w-screen h-[20vh] flex justify-center">
+
       </div>
     </div>
   );
