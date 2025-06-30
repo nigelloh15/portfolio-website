@@ -88,7 +88,7 @@ export default function Home() {
 
     const split = new SplitText(".projecttext", { type: "chars" });
 
-    let chars = split.chars; // an array of all the divs that wrap each character
+    const chars = split.chars; // an array of all the divs that wrap each character
 
     gsap.from(chars, {
       scrollTrigger: {
