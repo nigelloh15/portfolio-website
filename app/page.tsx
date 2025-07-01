@@ -292,7 +292,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="projects w-screen h-[190vh] sm:h-[300vh]">
+        <div className="projects w-screen h-[250vh] sm:h-[400vh]">
           <div className="w-full h-full sm:flex sm:flex-row bg-[var(--mid)] rounded-[2vw] text-[var(--light)]">
             <div className="hidden sm:block relative h-full w-[50%]">
               <div className="sticky top-0 px-[3%] pt-[23%] md:pt-[10%] lg:pt-[7%]">
@@ -340,6 +340,17 @@ export default function Home() {
                 </Link>
                 <div className="text-[4vw] sm:text-[1.3vw]">
                   Using Vite with React.js, Express.js, PrismaORM, and MongoDB, I developed Modulus, a social media platform designed for privacy. Modulus using RSA cryptography with the Miller-Rabin primality test to create encrypted messages that are publicly posted.
+                </div>
+              </div>
+              <div className="three w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
+                <Link href="https://github.com/nigelloh15/minigolf" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
+                  <span>
+                    MiniGolf
+                  </span>
+                  <span>&#8599;</span>
+                </Link>
+                <div className="text-[4vw] sm:text-[1.3vw]">
+                  Using Java w/ Swing, I co-developed a 2D mini golf game with a friend. The game features a variety of courses, including powerups and portals.
                 </div>
               </div>
             </div>
