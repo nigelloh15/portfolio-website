@@ -218,7 +218,7 @@ export default function Home() {
             </span>
             <span>&nbsp;</span>
             <span className="text-[var(--light)]">
-              -  Strong interest in quant finance and machine learning, open to oppurtunities in both areas.
+              -  Strong interest in quant finance, machine learning, and swe, open to oppurtunities in both areas.
             </span>
           </div>
         </div>
