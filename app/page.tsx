@@ -267,17 +267,32 @@ export default function Home() {
           </div>
 
 
-          <div className="skilllist py-[22vw] sm:py-[18vw] md:py-[15vw] lg:py-[12vw] h-full w-full flex flex-col justify-center text-[var(--background)] px-6">
+          <div className="skilllist py-[22vw] sm:py-[18vw] md:py-[15vw] lg:py-[12vw] h-full w-full flex flex-col justify-center gap-[5vh] text-[var(--background)] px-6">
             <div>
-              <div className="lg:inline-block text-[8vw] md:text[7vw] lg:text-[5vw]">
-                PointClickCare&nbsp;
+              <div>
+                <div className="lg:inline-block text-[8vw] md:text[7vw] lg:text-[5vw]">
+                  Capital One&nbsp;
+                </div>
+                <div className="lg:inline-block text-[3vw] md:text-[2vw] lg:text-[1vw]">
+                  June 2026 - August 2026
+                </div>
               </div>
-              <div className="lg:inline-block text-[3vw] md:text-[2vw] lg:text-[1vw]">
-                May 2025 - August 2025
+              <div className="text-[5vw] md:text-[4vw] lg:text-[2vw]">
+                Software Engineer Intern
               </div>
             </div>
-            <div className="text-[5vw] md:text-[4vw] lg:text-[2vw]">
-              Data Intern
+            <div>
+              <div>
+                <div className="lg:inline-block text-[8vw] md:text[7vw] lg:text-[5vw]">
+                  PointClickCare&nbsp;
+                </div>
+                <div className="lg:inline-block text-[3vw] md:text-[2vw] lg:text-[1vw]">
+                  May 2025 - August 2025
+                </div>
+              </div>
+              <div className="text-[5vw] md:text-[4vw] lg:text-[2vw]">
+                Data Intern
+              </div>
             </div>
           </div>
 
@@ -363,26 +378,33 @@ export default function Home() {
         </div>
 
         <div className="notes w-screen flex justify-center">
-          <div className="w-[92%] h-full rounded-[1vw] bg-[var(--light)] overflow-hidden text-[var(--mid)]">
-            <div className="text-[8vw] lg:text-[6vw] px-6 pt-4 lg:pt-0 h-[15vh]">
+          <div className="w-[92%] rounded-[2vw] bg-[var(--light)] overflow-hidden text-[var(--mid)] px-[6vw] py-[8vw] sm:px-[4vw] sm:py-[5vw]">
+            <div className="text-[8vw] lg:text-[6vw] leading-none pb-[6vw] sm:pb-[3vw]">
               NOTES
             </div>
 
-            <div className="flex flex-col justify-evenly h-[80%] w-full pt-[0.2vw]">
-              <div className="text-left py-6">
-                <div className="text-[5vw] sm:text-[3vw] px-6">
+            <div className="flex flex-col border-t border-[var(--mid)]/20">
+              <div className="flex flex-col gap-[2vw] py-[6vw] sm:flex-row sm:items-baseline sm:gap-[4vw] sm:py-[3vw] border-b border-[var(--mid)]/20">
+                <div className="text-[6vw] sm:text-[3vw] lg:text-[2vw] leading-none sm:w-[32%] sm:shrink-0">
                   Contact Me
                 </div>
-                <div className="text-[2vw] sm:text-[1vw] px-6">
-                  For work inquires, contact me on my LinkedIn, in the top right corner.
+                <div className="text-[clamp(0.85rem,1.6vw,1.15rem)] leading-relaxed sm:flex-1">
+                  For work inquiries, contact me on my{" "}
+                  <a
+                    href="https://www.linkedin.com/in/nigelloh15"
+                    target="_blank"
+                    className="underline underline-offset-4 hover:text-[var(--foreground)] transition-colors"
+                  >
+                    LinkedIn
+                  </a>.
                 </div>
               </div>
-              <div className="text-left py-6">
-                <div className="text-[5vw] sm:text-[3vw] px-6">
+              <div className="flex flex-col gap-[2vw] py-[6vw] sm:flex-row sm:items-baseline sm:gap-[4vw] sm:py-[3vw] border-b border-[var(--mid)]/20">
+                <div className="text-[6vw] sm:text-[3vw] lg:text-[2vw] leading-none sm:w-[32%] sm:shrink-0">
                   Hobbies
                 </div>
-                <div className="text-[2vw] sm:text-[1vw] px-6">
-                  Love making my own films, have used davinci resolve, premiere pro, after effects, and blender. Also love playing sports, hockey, tennis, volleyball, and pingpong.
+                <div className="text-[clamp(0.85rem,1.6vw,1.15rem)] leading-relaxed sm:flex-1">
+                  Love making my own films. I&apos;ve used DaVinci Resolve, Premiere Pro, After Effects, and Blender. Also love playing sports: hockey, tennis, and ping pong.
                 </div>
               </div>
             </div>
