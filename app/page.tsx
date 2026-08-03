@@ -303,7 +303,7 @@ export default function Home() {
               QUOTE OF THE TIME BEING
             </div>
             <div className="text-[3vw] md:text-[2vw] lg:text-[1vw] py-3">
-              &quot;Icaraus lauged as he fell. For he knew that falling meant that he had soared.&quot;
+              &quot;The grass is greener where you water it.&quot;
             </div>
           </div>
         </div>
