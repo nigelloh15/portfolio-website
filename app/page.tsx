@@ -324,7 +324,40 @@ export default function Home() {
                   PROJECTS
                 </div>
               </div>
-              <div className="one w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
+              <div className="w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
+                <Link href="https://devpost.com/software/_solanasim" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
+                  <span>
+                    Settlers of Solana
+                  </span>
+                  <span>&#8599;</span>
+                </Link>
+                <div className="text-[4vw] sm:text-[1.3vw]">
+                  Winner of Best Use of Solana at Hack the North. Built with Rust, Solana, TypeScript, and React, Settlers of Solana is a free-market economy of 100+ LLM agents with no fixed jobs, wages, or prices. Every order settles on-chain, so prices emerge from supply and demand alone.
+                </div>
+              </div>
+              <div className="w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
+                <Link href="https://devpost.com/software/ddrk-dance-dance-revolution-keyboard" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
+                  <span>
+                    DDRK
+                  </span>
+                  <span>&#8599;</span>
+                </Link>
+                <div className="text-[4vw] sm:text-[1.3vw]">
+                  Winner of Best Hardware Hack at UofTHacks 13. DDRK (Dance Dance Revolution Keyboard) is a keyboard replacement that lets you type with your feet. Built from plywood, arcade buttons, and an ESP32 running C firmware, it streams every step to a Python layer that maps button combinations to characters, turning a sedentary desk into an active one.
+                </div>
+              </div>
+              <div className="w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
+                <Link href="https://github.com/hackbio-ca/ai-cancer-cell-labelling" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
+                  <span>
+                    Mammonet
+                  </span>
+                  <span>&#8599;</span>
+                </Link>
+                <div className="text-[4vw] sm:text-[1.3vw]">
+                  Built with Next.js, Django, and PyTorch, Mammonet is a web application that assists with classifying malignant breast cancer histopathological images. Powered by a convolutional neural network, Mammonet can successfully identify malignant breast cancer cells with 96% accuracy.
+                </div>
+              </div>
+              <div className="w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
                 <Link href="https://www.onemillionnotes.co" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
                   <span>
                     OneMillionNotes
@@ -333,39 +366,6 @@ export default function Home() {
                 </Link>
                 <div className="text-[4vw] sm:text-[1.3vw]">
                   Winner of UofTHacks 12. Built with Next.js and Firebase, OneMillionNotes is a social media platform based on sticky note boards. It allows  users to users to anonymously submit short messages in real time with users across the globe.
-                </div>
-              </div>
-              <div className="two w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
-                <Link href="https://github.com/hackbio-ca/ai-cancer-cell-labelling" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
-                  <span>
-                    Mammonet
-                  </span>
-                  <span>&#8599;</span>
-                </Link>
-                <div className="text-[4vw] sm:text-[1.3vw]">
-                  Built with Next.js, Django, and PyTorch, Mammonet is a web application that assists with classifying malignant breast cancer histopathological images. Powered by a convolutional neural network, Mammonet can successfully identify malignant breast cancer cells with 86% accuracy.
-                </div>
-              </div>
-              <div className="three w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
-                <Link href="https://github.com/nigelloh15/modulus" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
-                  <span>
-                    Modulus
-                  </span>
-                  <span>&#8599;</span>
-                </Link>
-                <div className="text-[4vw] sm:text-[1.3vw]">
-                  Using Vite with React.js, Express.js, PrismaORM, and MongoDB, I developed Modulus, a social media platform designed for privacy. Modulus using RSA cryptography with the Miller-Rabin primality test to create encrypted messages that are publicly posted.
-                </div>
-              </div>
-              <div className="three w-full h-[60vh] sm:h-[100vh] flex flex-col justify-center pr-4">
-                <Link href="https://github.com/nigelloh15/minigolf" target="_blank" className="text-[8vw] sm:text-[4vw] z-30">
-                  <span>
-                    MiniGolf
-                  </span>
-                  <span>&#8599;</span>
-                </Link>
-                <div className="text-[4vw] sm:text-[1.3vw]">
-                  Using Java w/ Swing, I co-developed a 2D mini golf game with a friend. The game features a variety of courses, including powerups and portals.
                 </div>
               </div>
             </div>
